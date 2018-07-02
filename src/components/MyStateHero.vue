@@ -1,23 +1,52 @@
 <template>
   <div class="character-state">
     <div class="character-state__hero">
-      <img src="../assets/hero-zed.jpg" alt="Zed">
+      <img src="../assets/img/hero-zed.jpg" alt="Zed">
     </div>
     <div class="character-state__info">
       <ul class="character-state__list-skill">
-        <li class="character-state__skill"><img src="../assets/icon-skill.jpg"></li>
-        <li class="character-state__skill"><img src="../assets/icon-skill.jpg"></li>
-        <li class="character-state__skill"><img src="../assets/icon-skill.jpg"></li>
+        <li class="character-state__skill"><img src="../assets/img/skill-first.jpg"></li>
+        <li class="character-state__skill"><img src="../assets/img/icon-heal.jpg"></li>
+        <li class="character-state__skill"><img src="../assets/img/icon-vampire.jpg"></li>
+        <!-- <li class="character-state__skill" v-for="item in players" :key="item.id">
+          {{ item.hero }}
+          {{ testPlayer(item.hero, 'name') }}
+        </li> -->
+        <!-- <li class="character-state__skill">{{ testPlayer }}</li> -->
       </ul>
-      <div class="character-state__fraction"><img src="../assets/icon-fraction-01.png"></div>
-      <div class="progress-bar"><div class="progress"><span>1345/2600</span></div></div>
+      <div class="character-state__fraction"><img src="../assets/img/icon-fraction-01.png"></div>
+      <div class="progress-bar"><div class="progress" v-bind:style="{ width: progressHp + '%'}"><span>{{ hp }}/{{ maxHp }}</span></div></div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: `MyStateHero`
+  name: `MyStateHero`,
+  data () {
+    return {
+      players: this.$store.state.summoners.player.heroes
+    }
+  },
+  computed: {
+    hp () {
+      return this.$store.state.summoners.player.heroes[0].hp
+    },
+    maxHp () {
+      return this.$store.state.heroes.zed.maxHp
+    },
+    progressHp () {
+      return Math.floor(this.$store.state.summoners.player.heroes[0].hp / (this.$store.state.heroes.zed.maxHp / 100))
+    }
+  },
+  methods: {
+    testPlayer: function (hero, option) {
+      console.log(this.$store.state.heroes[hero][option])
+      // console.log(hero)
+      // console.log(option)
+    }
+  }
+
 }
 </script>
 
@@ -28,7 +57,7 @@ export default {
     padding-left: 14px;
     width: 344px;
     height: 110px;
-    background: url('../assets/my-info-hero.png') no-repeat center;
+    background: url('../assets/img/my-info-hero.png') no-repeat center;
     background-size: 344px 110px;
     display: flex;
     align-items: flex-start;
@@ -104,6 +133,7 @@ export default {
     background: linear-gradient(to right, #3deb6e, #57b9c9);
     border-radius: 5px;
     border-bottom-right-radius: 10px;
+    transition: width 0.3s;
   }
   .progress span {
     position: absolute;

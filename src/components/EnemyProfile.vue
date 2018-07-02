@@ -34,7 +34,7 @@ export default {
     padding-top: 4px;
   }
   .game-profile__wrapper--enemy-profile {
-    background: url('../assets/bg_enemyprofile.png') no-repeat;
+    background: url('../assets/img/bg_enemyprofile.png') no-repeat;
   }
   .game-profile__avatar {
     width: 90px;
@@ -56,7 +56,7 @@ export default {
   }
   .game-profile__options {
     margin-left: 25px;
-    background: url('../assets/icon-options.png') no-repeat center;
+    background: url('../assets/img/icon-options.png') no-repeat center;
     display: block;
     width: 5px;
     height: 19px;
@@ -64,7 +64,7 @@ export default {
   .game-profile__add-friend {
     margin-right: auto;
     margin-left: 25px;
-    background: url('../assets/icon-friend.png') no-repeat center;
+    background: url('../assets/img/icon-friend.png') no-repeat center;
     display: block;
     width: 50px;
     height: 50px;

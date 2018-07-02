@@ -10,10 +10,10 @@
 
 <script>
 export default {
-  name: 'MyHeroes',
+  name: 'EnemyHeroes',
   computed: {
     stateHp () {
-      return Math.floor(this.$store.state.summoners.player.heroes[0].hp / (this.$store.state.heroes.zed.maxHp / 100))
+      return Math.floor(this.$store.state.summoners.enemy.heroes[0].hp / (this.$store.state.heroes.lux.maxHp / 100))
     }
   }
 }
@@ -26,10 +26,12 @@ export default {
   }
   .heroes__list {
     display: flex;
-    flex-direction: row-reverse;
     list-style: none;
     padding: 0;
     margin: 0;
+  }
+  .heroes__item img {
+    transform: scale(-1,1);
   }
   .heroes__item {
     position: relative;
@@ -47,7 +49,7 @@ export default {
     transform: translateX(-50%);
   }
   .heroes__state-hp {
-    background: linear-gradient(to right, #3deb6e, #57b9c9);
+    background: linear-gradient(to right, #6d30c8, #d94fc7);
     height: 9px;
     width: 100%;
     border-radius: 3px;
@@ -55,14 +57,14 @@ export default {
   }
   .position-first {
     top: -50px;
-    left: -70px;
+    right: -70px;
   }
   .position-second {
     top: -10px;
-    left: -110px;
+    right: -110px;
   }
   .position-third {
     top: 70px;
-    left: -50px;
+    right: -50px;
   }
 </style>

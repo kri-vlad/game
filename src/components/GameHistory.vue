@@ -15,9 +15,9 @@
                       width="44" height="44" x="1" y="1"
                       fill="none" rx="10"></rect>
               </svg>
-              <img src="../assets/hero-zed.jpg" width="46"></li>
+              <img src="../assets/img/hero-zed.jpg" width="46"></li>
 
-            <li class="game-history__hero"><img src="../assets/skill-first.jpg" width="46"></li>
+            <li class="game-history__hero"><img src="../assets/img/skill-first.jpg" width="46"></li>
 
             <li class="game-history__hero  game-history__hero--second-b">
               <svg viewBox="0 0 46 46">
@@ -29,7 +29,7 @@
                       width="44" height="44" x="1" y="1"
                       fill="none" rx="10"></rect>
               </svg>
-              <img src="../assets/hero-lux.jpg" width="46"></li>
+              <img src="../assets/img/hero-lux.jpg" width="46"></li>
           </ul>
         </div>
         <div class="game-history__round">
@@ -45,9 +45,9 @@
                       width="44" height="44" x="1" y="1"
                       fill="none" rx="10"></rect>
               </svg>
-              <img src="../assets/hero-lux.jpg" width="46"></li>
+              <img src="../assets/img/hero-lux.jpg" width="46"></li>
 
-            <li class="game-history__hero"><img src="../assets/skill-lux.jpg" width="46"></li>
+            <li class="game-history__hero"><img src="../assets/img/skill-lux.jpg" width="46"></li>
 
             <li class="game-history__hero  game-history__hero--second-a">
               <svg viewBox="0 0 46 46">
@@ -59,7 +59,7 @@
                       width="44" height="44" x="1" y="1"
                       fill="none" rx="10"></rect>
               </svg>
-              <img src="../assets/hero-zed.jpg" width="46"></li>
+              <img src="../assets/img/hero-zed.jpg" width="46"></li>
           </ul>
         </div>
       </div>
@@ -132,7 +132,7 @@ export default {
     transform: translateY(-50%);
     right: -12px;
     display: block;
-    background: #21202f url('../assets/a_arrow.png') no-repeat center;
+    background: #21202f url('../assets/img/a_arrow.png') no-repeat center;
     background-size: 6px 9px;
     width: 16px;
     height: 16px;
@@ -146,7 +146,7 @@ export default {
     transform: translateY(-50%);
     right: -12px;
     display: block;
-    background: #21202f url('../assets/b_arrow.png') no-repeat center;
+    background: #21202f url('../assets/img/b_arrow.png') no-repeat center;
     background-size: 6px 9px;
     width: 16px;
     height: 16px;
@@ -160,7 +160,7 @@ export default {
     transform: translateY(-50%);
     left: -12px;
     display: block;
-    background: #21202f url('../assets/a_arrow.png') no-repeat center;
+    background: #21202f url('../assets/img/a_arrow.png') no-repeat center;
     background-size: 6px 9px;
     width: 16px;
     height: 16px;
@@ -174,7 +174,7 @@ export default {
     transform: translateY(-50%);
     left: -12px;
     display: block;
-    background: #21202f url('../assets/b_arrow.png') no-repeat center;
+    background: #21202f url('../assets/img/b_arrow.png') no-repeat center;
     background-size: 6px 9px;
     width: 16px;
     height: 16px;

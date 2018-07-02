@@ -1,23 +1,34 @@
 <template>
   <div class="character-state">
     <div class="character-state__hero">
-      <img src="../assets/hero-lux.jpg" alt="Zed">
+      <img src="../assets/img/hero-lux.jpg" alt="Zed">
     </div>
     <div class="character-state__info">
-      <div class="character-state__fraction"><img src="../assets/icon-fraction-02.png"></div>
+      <div class="character-state__fraction"><img src="../assets/img/icon-fraction-02.png"></div>
       <ul class="character-state__list-skill">
-        <li class="character-state__skill"><img src="../assets/icon-skill.jpg"></li>
-        <li class="character-state__skill"><img src="../assets/icon-skill.jpg"></li>
-        <li class="character-state__skill"><img src="../assets/icon-skill.jpg"></li>
+        <li class="character-state__skill"><img src="../assets/img/skill-lux.jpg"></li>
+        <li class="character-state__skill"><img src="../assets/img/icon-vampire.jpg"></li>
+        <li class="character-state__skill"><img src="../assets/img/icon-skill.jpg"></li>
       </ul>
-      <div class="progress-bar"><div class="progress"><span>2101/2600</span></div></div>
+      <div class="progress-bar"><div class="progress" v-bind:style="{ width: progressHp + '%'}"><span>{{ hp }}/{{ maxHp }}</span></div></div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: `EnemyStateHero`
+  name: `EnemyStateHero`,
+  computed: {
+    hp () {
+      return this.$store.state.summoners.enemy.heroes[0].hp
+    },
+    maxHp () {
+      return this.$store.state.heroes.lux.maxHp
+    },
+    progressHp () {
+      return Math.floor(this.$store.state.summoners.enemy.heroes[0].hp / (this.$store.state.heroes.lux.maxHp / 100))
+    }
+  }
 }
 </script>
 
@@ -28,7 +39,7 @@ export default {
     padding-right: 14px;
     width: 344px;
     height: 110px;
-    background: url('../assets/enemy-info-hero.png') no-repeat center;
+    background: url('../assets/img/enemy-info-hero.png') no-repeat center;
     background-size: 344px 110px;
     display: flex;
     flex-direction: row-reverse;
@@ -102,12 +113,12 @@ export default {
     position: relative;
   }
   .progress {
-    margin-left: auto;
     width: 75%;
     height: 100%;
     background: linear-gradient(to right, #6d30c8, #d94fc7);
     border-radius: 5px;
     border-bottom-left-radius: 10px;
+    transition: width 0.3s;
   }
   .progress span {
     position: absolute;

@@ -32,7 +32,7 @@ export default {
     padding-top: 4px;
   }
   .game-profile__wrapper--my-profile {
-    background: url('../assets/bg_myprofile.png') no-repeat;
+    background: url('../assets/img/bg_myprofile.png') no-repeat;
   }
   .game-profile__avatar {
     width: 90px;
@@ -55,7 +55,7 @@ export default {
   .game-profile__setting {
     margin-right: 20px;
     margin-left: auto;
-    background: url('../assets/icon-setting.png') no-repeat center;
+    background: url('../assets/img/icon-setting.png') no-repeat center;
     display: block;
     width: 50px;
     height: 50px;

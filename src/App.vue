@@ -42,12 +42,24 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: white;
-  background: url('./assets/bg.jpg') no-repeat top center;
-  background-size: 100vw 100vh;
-  height: 100vh;
+  background:#221f35 url('./assets/img/bg.jpg') no-repeat top center;
+  background-position-y: -100px;
+  background-size: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  min-width: 1900px;
+}
+
+@media (min-height: 900px) {
+  #app {
+    height: 100vh;
+  }
+}
+@media (min-height: 1100px) {
+  #app {
+    background-position-y: 0;
+  }
 }
 </style>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
