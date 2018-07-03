@@ -1,16 +1,16 @@
 <template>
   <div class="character-state">
     <div class="character-state__hero">
-      <img src="../assets/img/hero-lux.jpg" alt="Zed">
+      <img :src="currentHeroAvatar" :alt="currentHeroName">
     </div>
     <div class="character-state__info">
       <div class="character-state__fraction"><img src="../assets/img/icon-fraction-02.png"></div>
       <ul class="character-state__list-skill">
-        <li class="character-state__skill"><img src="../assets/img/skill-lux.jpg"></li>
-        <li class="character-state__skill"><img src="../assets/img/icon-vampire.jpg"></li>
-        <li class="character-state__skill"><img src="../assets/img/icon-skill.jpg"></li>
+        <li class="character-state__skill" v-for="item in currentHeroSkills" :key="item.id">
+          <img :src="item.img">
+        </li>
       </ul>
-      <div class="progress-bar"><div class="progress" v-bind:style="{ width: progressHp + '%'}"><span>{{ hp }}/{{ maxHp }}</span></div></div>
+      <div class="progress-bar"><div class="progress" v-bind:style="{ width: hpBar + '%'}"><span>{{ currentHeroHp }}/{{ currentHeroMaxHp }}</span></div></div>
     </div>
   </div>
 </template>
@@ -19,14 +19,41 @@
 export default {
   name: `EnemyStateHero`,
   computed: {
-    hp () {
-      return this.$store.state.summoners.enemy.heroes[0].hp
+    currentHero () {
+      return this.$store.state.summoners.enemy.currentHero
     },
-    maxHp () {
-      return this.$store.state.heroes.lux.maxHp
+    currentHeroHp () {
+      return this.$store.state.summoners.enemy.heroes[this.currentHero].hp
     },
-    progressHp () {
-      return Math.floor(this.$store.state.summoners.enemy.heroes[0].hp / (this.$store.state.heroes.lux.maxHp / 100))
+    currentHeroMaxHp () {
+      let hero = this.$store.state.summoners.enemy.heroes[this.currentHero].hero
+      return this.$store.state.heroes[hero].maxHp
+    },
+    hpBar () {
+      let hero = this.$store.state.summoners.enemy.heroes[this.currentHero].hero
+      return Math.floor(this.$store.state.summoners.enemy.heroes[this.currentHero].hp / (this.$store.state.heroes[hero].maxHp / 100))
+    },
+    currentHeroAvatar () {
+      let hero = this.$store.state.summoners.enemy.heroes[this.currentHero].hero
+      return this.$store.state.heroes[hero].avatar
+    },
+    currentHeroName () {
+      let hero = this.$store.state.summoners.enemy.heroes[this.currentHero].hero
+      return this.$store.state.heroes[hero].name
+    },
+    currentHeroSkills () {
+      let hero = this.$store.state.summoners.enemy.heroes[this.currentHero].hero
+      let heroSkills = this.$store.state.heroes[hero].skills
+      let heroSkillsData = []
+      heroSkills.forEach(element => {
+        heroSkillsData.push(this.$store.state.skills[element])
+      })
+      return heroSkillsData
+    }
+  },
+  methods: {
+    testPlayer: function (hero, option) {
+      console.log(this.$store.state.heroes[hero][option])
     }
   }
 }

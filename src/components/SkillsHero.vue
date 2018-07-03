@@ -1,10 +1,16 @@
 <template>
   <div class="skills-hero">
     <ul class="skills-hero__list">
-      <li class="skills-hero__skill" @click="damage"><img src="../assets/img/skill-first.jpg" alt=""><span class="green"></span><p>Q</p></li>
-      <li class="skills-hero__skill" @click="heal"><img src="../assets/img/icon-heal.jpg" alt=""><span class="green"></span><p>W</p></li>
-      <li class="skills-hero__skill"><img src="../assets/img/icon-vampire.jpg" alt=""><span class="red"></span><p>E</p></li>
-      <li class="skills-hero__skill"><img src="../assets/img/icon-swap.png" alt=""><p>C</p></li>
+      <li class="skills-hero__skill" v-bind="currentHeroSkills" @click="keyQ">
+        <img :src="currentHeroSkills[0].img"><span class="green"></span><p>Q</p>
+      </li>
+      <li class="skills-hero__skill" v-bind="currentHeroSkills" @click="keyW">
+        <img :src="currentHeroSkills[1].img"><span class="green"></span><p>W</p>
+      </li>
+      <li class="skills-hero__skill" v-bind="currentHeroSkills" @click="keyE">
+        <img :src="currentHeroSkills[2].img"><span class="red"></span><p>E</p>
+      </li>
+      <li class="skills-hero__skill" @click="switchMyHero"><img src="../assets/img/icon-swap.png" alt=""><p>C</p></li>
     </ul>
   </div>
 </template>
@@ -14,21 +20,59 @@ import Mousetrap from '../assets/js/mousetrap.js'
 
 export default ({
   name: 'SkillsHero',
-  methods: {
-    damage () {
-      this.$store.commit('dealDamage', 1000)
+  computed: {
+    currentHero () {
+      console.log(this.$store.state.summoners.player.currentHero)
+      return this.$store.state.summoners.player.currentHero
     },
-    heal () {
-      this.$store.commit('healHero', 200)
+    currentHeroSkills () {
+      let hero = this.$store.state.summoners.player.heroes[this.currentHero].hero
+      let heroSkills = this.$store.state.heroes[hero].skills
+      let heroSkillsData = []
+      heroSkills.forEach(element => {
+        heroSkillsData.push(this.$store.state.skills[element])
+      })
+      console.log(heroSkillsData)
+      return heroSkillsData
+    }
+  },
+  methods: {
+    keyQ () {
+      let effectName = this.currentHeroSkills[0].effectName
+      let effectValue = this.currentHeroSkills[0].effectValue
+      this.$store.commit(effectName, effectValue)
+    },
+    keyW () {
+      let effectName = this.currentHeroSkills[1].effectName
+      let effectValue = this.currentHeroSkills[1].effectValue
+      this.$store.commit(effectName, effectValue)
+    },
+    keyE () {
+      let effectName = this.currentHeroSkills[2].effectName
+      let effectValue = this.currentHeroSkills[2].effectValue
+      this.$store.commit(effectName, effectValue)
+    },
+    switchMyHero () {
+      this.$store.commit('switchMyHero')
     }
   },
   beforeMount () {
     const SkillsHero = this
-    Mousetrap.bind('q', function () {
-      SkillsHero.damage()
+    Mousetrap.bind(['q', 'й'], function () {
+      SkillsHero.keyQ()
+      SkillsHero.$root.userAction({id: 0})
     })
-    Mousetrap.bind('w', function () {
-      SkillsHero.heal()
+    Mousetrap.bind(['w', 'ц'], function () {
+      SkillsHero.keyW()
+      SkillsHero.$root.userAction({id: 0})
+    })
+    Mousetrap.bind(['e', 'у'], function () {
+      SkillsHero.keyE()
+      SkillsHero.$root.userAction({id: 0})
+    })
+    Mousetrap.bind(['c', 'с'], function () {
+      SkillsHero.switchMyHero()
+      SkillsHero.$root.userAction({id: 0})
     })
   }
 })

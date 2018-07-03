@@ -51,6 +51,7 @@ export default {
     color: white;
   }
   .game-profile__label {
+    margin-left: auto;
     font-size: 14px;
     color: #9d9acc;
   }

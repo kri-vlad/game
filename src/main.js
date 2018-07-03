@@ -7,9 +7,16 @@ import store from './Store/index.js'
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
-new Vue({
+let gameNya = new Vue({
   el: '#app',
   components: { App },
   template: '<App/>',
-  store
+  store,
+  methods: {
+    userAction: function (action) {
+      console.log(action)
+    }
+  }
 })
+
+window.gameNya = gameNya

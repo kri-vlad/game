@@ -1,9 +1,12 @@
 <template>
   <div class="heroes">
     <ul class="heroes__list">
-      <li class="heroes__item  position-first"><img src="../assets/img/model-hero.png"><div class="heroes__hp"><div class="heroes__state-hp" v-bind:style="{ width: stateHp + '%'}"></div></div></li>
-      <li class="heroes__item  position-second"><img src="../assets/img/model-hero.png"><div class="heroes__hp"><div class="heroes__state-hp"></div></div></li>
-      <li class="heroes__item  position-third"><img src="../assets/img/model-hero.png"><div class="heroes__hp"><div class="heroes__state-hp"></div></div></li>
+      <li class="heroes__item" v-for="(item, index) in heroes" :key="item.id">
+        <img :src="item.model">
+        <div class="heroes__hp">
+          <div class="heroes__state-hp" v-bind:style="{ width: hpBar(index) + '%'}"></div>
+        </div>
+      </li>
     </ul>
   </div>
 </template>
@@ -12,9 +15,26 @@
 export default {
   name: 'MyHeroes',
   computed: {
-    stateHp () {
-      return Math.floor(this.$store.state.summoners.player.heroes[0].hp / (this.$store.state.heroes.zed.maxHp / 100))
+    heroes () {
+      let heroes = this.$store.state.summoners.player.heroes
+      let heroData = []
+      heroes.forEach(element => {
+        let hero = element.hero
+        heroData.push(this.$store.state.heroes[hero])
+      })
+      return heroData
     }
+  },
+  methods: {
+    hpBar (id) {
+      let hero = this.$store.state.summoners.player.heroes[id].hero
+      return Math.floor(this.$store.state.summoners.player.heroes[id].hp / (this.$store.state.heroes[hero].maxHp / 100))
+    }
+    // heroPosition (id) {
+    //   let positionClasses = ['position-first', 'position-second', 'position-third']
+    //   let positionClass = positionClasses[id]
+    //   return positionClass
+    // }
   }
 }
 </script>
@@ -33,6 +53,18 @@ export default {
   }
   .heroes__item {
     position: relative;
+  }
+  .heroes__item:nth-child(1) {
+    top: -50px;
+    left: -70px;
+  }
+  .heroes__item:nth-child(2){
+    top: -10px;
+    left: -110px;
+  }
+  .heroes__item:nth-child(3) {
+    top: 70px;
+    left: -50px;
   }
   .heroes__hp {
     border-radius: 5px;
