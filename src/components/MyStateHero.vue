@@ -9,7 +9,7 @@
           <img :src="item.img">
         </li>
       </ul>
-      <div class="character-state__fraction"><img src="../assets/img/icon-fraction-01.png"></div>
+      <div class="character-state__fraction"><img :src="currentHeroFraction"></div>
       <div class="progress-bar"><div class="progress" v-bind:style="{ width: hpBar + '%'}"><span>{{ currentHeroHp }}/{{ currentHeroMaxHp }}</span></div></div>
     </div>
   </div>
@@ -41,6 +41,11 @@ export default {
       let hero = this.$store.state.summoners.player.heroes[this.currentHero].hero
       return this.$store.state.heroes[hero].name
     },
+    currentHeroFraction () {
+      let hero = this.$store.state.summoners.player.heroes[this.currentHero].hero
+      let fraction = this.$store.state.heroes[hero].fraction
+      return this.$store.state.fraction[fraction].icon
+    },
     currentHeroSkills () {
       let hero = this.$store.state.summoners.player.heroes[this.currentHero].hero
       let heroSkills = this.$store.state.heroes[hero].skills
@@ -50,13 +55,7 @@ export default {
       })
       return heroSkillsData
     }
-  },
-  methods: {
-    testPlayer: function (hero, option) {
-      console.log(this.$store.state.heroes[hero][option])
-    }
   }
-
 }
 </script>
 

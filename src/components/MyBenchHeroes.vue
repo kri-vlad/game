@@ -2,8 +2,10 @@
   <div class="bench-heroes">
     <div class="bench-heroes__wrapper">
       <ul class="bench-heroes__list">
-        <li class="bench-heroes__hero"><div class="bench-heroes__state-hp"></div><img src="../assets/img/hero-lux.jpg" width="74"></li>
-        <li class="bench-heroes__hero"><div class="bench-heroes__state-hp"></div><img src="../assets/img/hero-annie.jpg" width="74"></li>
+        <li class="bench-heroes__hero" v-for="(item, index) in heroes" :key="item.id">
+          <div class="bench-heroes__state-hp" v-bind:style="{ width: hpBar(index) + '%'}"></div>
+          <img :src="item.avatar" width="74">
+        </li>
       </ul>
     </div>
   </div>
@@ -11,7 +13,36 @@
 
 <script>
 export default {
-  name: 'MyBenchHeroes'
+  name: 'MyBenchHeroes',
+  computed: {
+    currentHero () {
+      return this.$store.state.summoners.player.currentHero
+    },
+    heroes () {
+      let heroes = this.$store.state.summoners.player.heroes
+      let heroData = []
+      heroes.forEach((element, index) => {
+        let hero = element.hero
+        if (!(index === this.currentHero)) {
+          heroData.push(this.$store.state.heroes[hero])
+        }
+      })
+      return heroData
+    }
+  },
+  methods: {
+    hpBar (id) {
+      let heroes = this.$store.state.summoners.player.heroes
+      let heroData = []
+      heroes.forEach((element, index) => {
+        if (!(index === this.currentHero)) {
+          heroData.push(element)
+        }
+      })
+      let hero = heroData[id].hero
+      return Math.floor(heroData[id].hp / (this.$store.state.heroes[hero].maxHp / 100))
+    }
+  }
 }
 </script>
 

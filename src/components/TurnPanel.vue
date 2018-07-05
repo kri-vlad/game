@@ -2,7 +2,7 @@
   <div class="turn-panel">
     <MyStateHero/>
     <div class="turn-panel__wrapper">
-      <p class="turn-panel__timer">48</p>
+      <p class="turn-panel__timer" v-bind="roundTimer()">{{ time }}</p>
       <button class="turn-panel__btn-skip">Skip Turn</button>
     </div>
     <EnemyStateHero/>
@@ -15,9 +15,27 @@ import EnemyStateHero from './EnemyStateHero'
 
 export default {
   name: `TurnPanel`,
+  data () {
+    return {
+      time: 30,
+      timer: null
+    }
+  },
   components: {
     MyStateHero,
     EnemyStateHero
+  },
+  methods: {
+    roundTimer () {
+      this.timer = setInterval(() => {
+        if (this.time > 0) {
+          this.time--
+          clearInterval(this.timer)
+        } else {
+          clearInterval(this.timer)
+        }
+      }, 1000)
+    }
   }
 }
 </script>

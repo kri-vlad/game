@@ -22,7 +22,6 @@ export default ({
   name: 'SkillsHero',
   computed: {
     currentHero () {
-      console.log(this.$store.state.summoners.player.currentHero)
       return this.$store.state.summoners.player.currentHero
     },
     currentHeroSkills () {
@@ -32,7 +31,6 @@ export default ({
       heroSkills.forEach(element => {
         heroSkillsData.push(this.$store.state.skills[element])
       })
-      console.log(heroSkillsData)
       return heroSkillsData
     }
   },

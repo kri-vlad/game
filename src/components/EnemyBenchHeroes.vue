@@ -2,8 +2,14 @@
   <div class="bench-heroes">
     <div class="bench-heroes__wrapper">
       <ul class="bench-heroes__list">
-        <li class="bench-heroes__hero"><div class="bench-heroes__state-hp"></div><img src="../assets/img/hero-zed.jpg" width="74"></li>
-        <li class="bench-heroes__hero"><div class="bench-heroes__state-hp"></div><img src="../assets/img/hero-annie.jpg" width="74"></li>
+        <li class="bench-heroes__hero" v-for="(item, index) in heroes" :key="item.id">
+          <div class="bench-heroes__state-hp" v-bind:style="{ width: hpBar(index) + '%'}"></div>
+          <img :src="item.avatar" width="74">
+        </li>
+        <li class="bench-heroes__hero  bench-heroes__hero--died" v-for="item in deadHeroes" :key="item.id">
+          <div class="bench-heroes__state-hp" style="width: 0"></div>
+          <img :src="item.avatar" width="74">
+        </li>
       </ul>
     </div>
   </div>
@@ -11,7 +17,51 @@
 
 <script>
 export default {
-  name: 'EnemyBenchHeroes'
+  name: 'EnemyBenchHeroes',
+  computed: {
+    currentHero () {
+      return this.$store.state.summoners.enemy.currentHero
+    },
+    heroes () {
+      let heroes = this.$store.state.summoners.enemy.heroes
+      let heroData = []
+      heroes.forEach((element, index) => {
+        let hero = element.hero
+        if (!(element.hp === 0)) {
+          if (!(index === this.currentHero)) {
+            heroData.push(this.$store.state.heroes[hero])
+          }
+        }
+      })
+      return heroData
+    },
+    deadHeroes () {
+      let heroes = this.$store.state.summoners.enemy.heroes
+      let heroData = []
+      heroes.forEach((element, index) => {
+        let hero = element.hero
+        if (element.hp === 0) {
+          heroData.push(this.$store.state.heroes[hero])
+        }
+      })
+      return heroData
+    }
+  },
+  methods: {
+    hpBar (id) {
+      let heroes = this.$store.state.summoners.enemy.heroes
+      let heroData = []
+      heroes.forEach((element, index) => {
+        if (!(index === this.currentHero)) {
+          if (!(element.hp === 0)) {
+            heroData.push(element)
+          }
+        }
+      })
+      let hero = heroData[id].hero
+      return Math.floor(heroData[id].hp / (this.$store.state.heroes[hero].maxHp / 100))
+    }
+  }
 }
 </script>
 
@@ -31,6 +81,7 @@ export default {
     padding-top: 27px;
     padding-right: 34px;
     margin: 0;
+    margin-bottom: 12px;
   }
   .bench-heroes__hero {
     border-radius: 12px;
@@ -54,7 +105,7 @@ export default {
     top: 0;
     z-index: 2;
   }
-  .bench-heroes__hero:first-child {
+  .bench-heroes__hero:not(:last-child) {
     margin-bottom: 12px;
   }
   .bench-heroes__hero img {
@@ -64,6 +115,9 @@ export default {
     margin: 0 auto;
     border-radius: 12px;
     box-shadow: 0 0 0 3px rgba(31, 30, 44, 0.7);
+  }
+  .bench-heroes__hero--died img {
+    filter: grayscale(100%);
   }
   .bench-heroes__state-hp {
     position: absolute;

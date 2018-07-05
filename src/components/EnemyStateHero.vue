@@ -4,7 +4,7 @@
       <img :src="currentHeroAvatar" :alt="currentHeroName">
     </div>
     <div class="character-state__info">
-      <div class="character-state__fraction"><img src="../assets/img/icon-fraction-02.png"></div>
+      <div class="character-state__fraction"><img :src="currentHeroFraction"></div>
       <ul class="character-state__list-skill">
         <li class="character-state__skill" v-for="item in currentHeroSkills" :key="item.id">
           <img :src="item.img">
@@ -41,6 +41,11 @@ export default {
       let hero = this.$store.state.summoners.enemy.heroes[this.currentHero].hero
       return this.$store.state.heroes[hero].name
     },
+    currentHeroFraction () {
+      let hero = this.$store.state.summoners.enemy.heroes[this.currentHero].hero
+      let fraction = this.$store.state.heroes[hero].fraction
+      return this.$store.state.fraction[fraction].icon
+    },
     currentHeroSkills () {
       let hero = this.$store.state.summoners.enemy.heroes[this.currentHero].hero
       let heroSkills = this.$store.state.heroes[hero].skills
@@ -51,10 +56,8 @@ export default {
       return heroSkillsData
     }
   },
-  methods: {
-    testPlayer: function (hero, option) {
-      console.log(this.$store.state.heroes[hero][option])
-    }
+  beforeUpdate () {
+    this.$store.commit('switchDeadHero')
   }
 }
 </script>

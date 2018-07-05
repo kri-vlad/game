@@ -20,15 +20,28 @@ export default {
       let heroData = []
       heroes.forEach(element => {
         let hero = element.hero
-        heroData.push(this.$store.state.heroes[hero])
+        if (!(element.hp === 0)) {
+          heroData.push(this.$store.state.heroes[hero])
+        }
+      })
+      return heroData
+    },
+    livingHeroes () {
+      let heroes = this.$store.state.summoners.enemy.heroes
+      let heroData = []
+      heroes.forEach(element => {
+        if (!(element.hp === 0)) {
+          heroData.push(element)
+        }
       })
       return heroData
     }
   },
   methods: {
     hpBar (id) {
-      let hero = this.$store.state.summoners.enemy.heroes[id].hero
-      return Math.floor(this.$store.state.summoners.enemy.heroes[id].hp / (this.$store.state.heroes[hero].maxHp / 100))
+      let heroes = this.livingHeroes
+      let hero = heroes[id].hero
+      return Math.floor(this.livingHeroes[id].hp / (this.$store.state.heroes[hero].maxHp / 100))
     }
     // heroPosition (id) {
     //   let positionClasses = ['position-first', 'position-second', 'position-third']

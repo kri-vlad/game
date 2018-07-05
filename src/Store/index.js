@@ -13,21 +13,24 @@ const store = new Vuex.Store({
         avatar: require('../assets/img/hero-zed.jpg'),
         model: require('../assets/img/model-hero.png'),
         maxHp: 2600,
-        skills: ['AttackSeries', 'MyHeal', 'Vampire']
+        skills: ['AttackSeries', 'MyHeal', 'Vampire'],
+        fraction: 'red'
       },
       lux: {
         name: 'Lux',
         avatar: require('../assets/img/hero-lux.jpg'),
         model: require('../assets/img/model-hero.png'),
         maxHp: 2200,
-        skills: ['Demo4', 'Demo5', 'Demo6']
+        skills: ['Demo4', 'Demo5', 'Demo6'],
+        fraction: 'black'
       },
       annie: {
         name: 'Annie',
         avatar: require('../assets/img/hero-annie.jpg'),
         model: require('../assets/img/model-hero.png'),
         maxHp: 2100,
-        skills: ['Demo7', 'Demo8', 'Demo9']
+        skills: ['Demo7', 'Demo8', 'Demo9'],
+        fraction: 'red'
       }
     },
     skills: {
@@ -172,7 +175,7 @@ const store = new Vuex.Store({
           },
           {
             hero: 'zed',
-            hp: 1550,
+            hp: 0,
             buffs: [
               {
                 id: 'RapidFire',
@@ -203,6 +206,20 @@ const store = new Vuex.Store({
             ]
           }
         ]
+      }
+    },
+    fraction: {
+      red: {
+        name: 'red',
+        icon: require('../assets/img/icon-fraction-01.png'),
+        vulnerable: [],
+        excellence: []
+      },
+      black: {
+        name: 'black',
+        icon: require('../assets/img/icon-fraction-02.png'),
+        vulnerable: [],
+        excellence: []
       }
     },
     gameHistory: [
@@ -321,6 +338,20 @@ const store = new Vuex.Store({
         state.summoners.player.currentHero = 0
       } else {
         state.summoners.player.currentHero++
+      }
+    },
+    switchDeadHero (state) {
+      console.log('Герой мёртв')
+      let currentHero = state.summoners.enemy.currentHero
+      let hero = state.summoners.enemy.heroes[currentHero]
+      let heroes = state.summoners.enemy.heroes
+      if (hero.hp === 0) {
+        heroes.forEach((element, index) => {
+          if (element.hp > 0) {
+            state.summoners.enemy.currentHero = index
+            state.summoners.player.currentTarget = index
+          }
+        })
       }
     }
   }
