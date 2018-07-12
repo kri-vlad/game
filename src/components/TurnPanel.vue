@@ -3,7 +3,7 @@
     <MyStateHero/>
     <div class="turn-panel__wrapper">
       <p class="turn-panel__timer" v-bind="roundTimer()">{{ time }}</p>
-      <button class="turn-panel__btn-skip">Skip Turn</button>
+      <button class="turn-panel__btn-skip"><div>Skip Turn</div></button>
     </div>
     <EnemyStateHero/>
   </div>
@@ -58,12 +58,20 @@ export default {
   .turn-panel__btn-skip {
     border: 2px solid #9d9acc;
     border-radius: 25px;
-    background: #37364c;
+    background: #36354a;
     color: white;
-    padding: 0 40px;
+    width: 150px;
+    padding: 0;
     line-height: 46px;
     margin-top: 10px;
     font-size: 16px;
     font-family: 'geomanistbook', Helvetica, Arial, sans-serif;
+    box-shadow:
+      0 0 0 6px rgba(0, 0, 0, 0.5);
+  }
+  .turn-panel__btn-skip div {
+    box-shadow: inset 0 0 0 2px #272737;
+    background: linear-gradient(to right, #343347, #605f82);
+    border-radius: 25px;
   }
 </style>

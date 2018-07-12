@@ -43,11 +43,6 @@ export default {
       let hero = heroes[id].hero
       return Math.floor(this.livingHeroes[id].hp / (this.$store.state.heroes[hero].maxHp / 100))
     }
-    // heroPosition (id) {
-    //   let positionClasses = ['position-first', 'position-second', 'position-third']
-    //   let positionClass = positionClasses[id]
-    //   return positionClass
-    // }
   }
 }
 </script>

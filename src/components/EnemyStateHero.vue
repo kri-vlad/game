@@ -57,7 +57,7 @@ export default {
     }
   },
   beforeUpdate () {
-    this.$store.commit('switchDeadHero')
+    this.$store.commit('switchDeadHero', 'enemy')
   }
 }
 </script>

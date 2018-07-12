@@ -70,18 +70,47 @@ export default {
     width: 69px;
     height: 267px;
   }
-  .bench-heroes__wrapper {
-    width: 100%;
-    height: 267px;
-    background: url('../assets/img/bench_right.png') no-repeat center right;
-  }
   .bench-heroes__list {
+    width: 69px;
+    height: auto;
+    position: relative;
     list-style: none;
     padding: 0;
-    padding-top: 27px;
+    padding-top: 22px;
+    padding-bottom: 22px;
     padding-right: 34px;
     margin: 0;
     margin-bottom: 12px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    box-shadow: -22px -5px 30px -10px rgba(15, 15, 27, 0.7);
+    box-sizing: border-box;
+  }
+  .bench-heroes__list::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    height: 100%;
+    width: 69px;
+    background: linear-gradient(to bottom, #1d2331, #191d26);
+    z-index: 1;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+  }
+  .bench-heroes__list::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: 0;
+    display: block;
+    height: calc(100% + 8px);
+    width: 69px;
+    background: linear-gradient(to right, #d94fc7, #6d30c8);
+    z-index: 0;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
   }
   .bench-heroes__hero {
     border-radius: 12px;
@@ -93,6 +122,18 @@ export default {
     margin-left: -55px;
     position: relative;
     background: #242333;
+  }
+  .bench-heroes__hero::before {
+    content: '';
+    position: absolute;
+    background: url('../assets/img/decor-bench.png') no-repeat center;
+    width: 11px;
+    height: 14px;
+    display: block;
+    top: 50%;
+    right: -34px;
+    transform: translateY(-50%);
+    z-index: 3;
   }
   .bench-heroes__hero::after {
     content: '';
@@ -127,7 +168,7 @@ export default {
     transform: scale(0.9, 0.9);
     height: 15px;
     width: 100%;
-    border-radius: 3px;
+    border-radius: 12px;
     transition: width 0.3s;
     box-shadow: 0 0 0 0 #242333;
   }

@@ -1,7 +1,7 @@
 <template>
-  <div class="game-profile">
+  <div class="game-profile  game-profile--enemy-profile">
 
-    <div class="game-profile__wrapper  game-profile__wrapper--enemy-profile">
+    <div class="game-profile__wrapper">
       <div class="game-profile__avatar"><img src="" alt=""></div>
       <div class="game-profile__wrapper-text">
         <span class="game-profile__username">Nyashkin</span>
@@ -22,19 +22,44 @@ export default {
 
 <style scoped>
   .game-profile {
-    width: 355px;
-    height: 93px;
+    width: 404px;
+    height: 89px;
+    position: relative;
+  }
+  .game-profile--enemy-profile::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to right, #2c263c, #171325);
+    z-index: 1;
+    border-top-left-radius: 15px;
+  }
+  .game-profile--enemy-profile::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: 0;
+    display: block;
+    height: calc(100% + 4px);
+    width: 100%;
+    background: linear-gradient(to right, #803de3, #d94fc7);
+    z-index: 0;
+    border-top-left-radius: 15px;
   }
   .game-profile__wrapper {
     display: flex;
-    flex-direction: row-reverse;
     align-items: center;
+    flex-direction: row-reverse;
+    width: 100%;
     height: 100%;
     box-sizing: border-box;
     padding-top: 4px;
-  }
-  .game-profile__wrapper--enemy-profile {
-    background: url('../assets/img/bg_enemyprofile.png') no-repeat;
+    position: relative;
+    z-index: 5;
   }
   .game-profile__avatar {
     width: 90px;

@@ -137,7 +137,7 @@ const store = new Vuex.Store({
           },
           {
             hero: 'annie',
-            hp: 700,
+            hp: 0,
             buffs: [
               {
                 id: 'RapidFire',
@@ -331,27 +331,53 @@ const store = new Vuex.Store({
     },
     switchMyHero (state) {
       console.log('Смена героя')
-      let heroesCount = state.summoners.player.heroes.length
-      heroesCount--
       let currentHeroIndex = state.summoners.player.currentHero
+      let heroes = state.summoners.player.heroes
+      let livingHeroes = []
+      heroes.forEach(element => {
+        if (element.hp > 0) {
+          livingHeroes.push(element)
+        }
+      })
+
+      let heroesCount = livingHeroes.length
+      heroesCount--
+
       if (currentHeroIndex === heroesCount) {
         state.summoners.player.currentHero = 0
       } else {
         state.summoners.player.currentHero++
       }
     },
-    switchDeadHero (state) {
+    switchDeadHero (state, who) {
       console.log('Герой мёртв')
-      let currentHero = state.summoners.enemy.currentHero
-      let hero = state.summoners.enemy.heroes[currentHero]
-      let heroes = state.summoners.enemy.heroes
-      if (hero.hp === 0) {
-        heroes.forEach((element, index) => {
-          if (element.hp > 0) {
-            state.summoners.enemy.currentHero = index
-            state.summoners.player.currentTarget = index
-          }
-        })
+
+      if (who === 'player') {
+        let currentHero = state.summoners.player.currentHero
+        let hero = state.summoners.player.heroes[currentHero]
+        let heroes = state.summoners.player.heroes
+        if (hero.hp === 0) {
+          heroes.forEach((element, index) => {
+            if (element.hp > 0) {
+              state.summoners.player.currentHero = index
+              state.summoners.enemy.currentTarget = index
+            }
+          })
+        }
+      }
+
+      if (who === 'enemy') {
+        let currentHero = state.summoners.enemy.currentHero
+        let hero = state.summoners.enemy.heroes[currentHero]
+        let heroes = state.summoners.enemy.heroes
+        if (hero.hp === 0) {
+          heroes.forEach((element, index) => {
+            if (element.hp > 0) {
+              state.summoners.enemy.currentHero = index
+              state.summoners.player.currentTarget = index
+            }
+          })
+        }
       }
     }
   }

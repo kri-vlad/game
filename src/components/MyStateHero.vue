@@ -55,6 +55,9 @@ export default {
       })
       return heroSkillsData
     }
+  },
+  beforeUpdate () {
+    this.$store.commit('switchDeadHero', 'player')
   }
 }
 </script>
@@ -63,26 +66,56 @@ export default {
   .character-state {
     box-sizing: border-box;
     padding-top: 10px;
-    padding-left: 14px;
-    width: 344px;
+    padding-left: 10px;
+    width: 329px;
     height: 110px;
-    background: url('../assets/img/my-info-hero.png') no-repeat center;
-    background-size: 344px 110px;
     display: flex;
     align-items: flex-start;
     flex-wrap: wrap;
+    position: relative;
+  }
+  .character-state::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to right, #1c222d, #313748);
+    z-index: 1;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    box-shadow: inset 0px 30px 40px 0px rgba(0, 0, 0, 0.5);
+  }
+  .character-state::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -4px;
+    display: block;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to bottom, #57b9c9, #3deb6e);
+    z-index: 0;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
   }
   .character-state__info {
     padding-left: 14px;
     display: flex;
     flex-wrap: wrap;
-    width: 230px;
+    width: 220px;
     box-sizing: border-box;
     align-items: center;
+    position: relative;
+    z-index: 5;
   }
   .character-state__hero {
     width: 90px;
     height: 90px;
+    position: relative;
+    z-index: 5;
   }
   .character-state__hero img {
     display: block;
@@ -100,8 +133,8 @@ export default {
   }
   .character-state__skill {
     margin-right: 10px;
-    width: 46px;
-    height: 46px;
+    width: 42px;
+    height: 42px;
     background: #29283a;
   }
   .character-state__skill:last-child {
@@ -114,8 +147,8 @@ export default {
     border-radius: 10px;
   }
   .character-state__fraction {
-    width: 46px;
-    height: 46px;
+    width: 42px;
+    height: 42px;
     margin-top: 5px;
     margin-left: 10px;
   }

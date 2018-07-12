@@ -2,15 +2,72 @@
   <div class="skills-hero">
     <ul class="skills-hero__list">
       <li class="skills-hero__skill" v-bind="currentHeroSkills" @click="keyQ">
-        <img :src="currentHeroSkills[0].img"><span class="green"></span><p>Q</p>
+        <img class="skills-hero__skill-icon" :src="currentHeroSkills[0].img">
+        <span class="green"></span>
+        <p class="skills-hero__key">Q</p>
+
+        <div class="skills-hero__hover-info">
+          <div class="skills-hero__info-top">
+            <div class="skills-hero__info-wrapper-img"><img :src="currentHeroSkills[0].img" class="skills-hero__info-img"></div>
+            <div class="skills-hero__info-text-top">
+              <p class="skills-hero__info-name">{{ currentHeroSkills[0].name }}</p>
+              <p class="skills-hero__info-hit-chance"><span>100%</span> Hit Chance</p>
+            </div>
+            <div class="skills-hero__info-wrapper-img">
+              <img src="../assets/img/element_1.png" class="skills-hero__info-element">
+              <img src="../assets/img/element_2.png" class="skills-hero__info-element">
+            </div>
+          </div>
+          <p class="skills-hero__info-description">Lorem Ipsum is Ability: 35 of the printing and typesetting industry. Damage: 19</p>
+        </div>
+
       </li>
       <li class="skills-hero__skill" v-bind="currentHeroSkills" @click="keyW">
-        <img :src="currentHeroSkills[1].img"><span class="green"></span><p>W</p>
+        <img class="skills-hero__skill-icon" :src="currentHeroSkills[1].img">
+        <span class="green"></span>
+        <p class="skills-hero__key">W</p>
+
+        <div class="skills-hero__hover-info">
+          <div class="skills-hero__info-top">
+            <div class="skills-hero__info-wrapper-img"><img :src="currentHeroSkills[1].img" class="skills-hero__info-img"></div>
+            <div class="skills-hero__info-text-top">
+              <p class="skills-hero__info-name">{{ currentHeroSkills[1].name }}</p>
+              <p class="skills-hero__info-hit-chance"><span>100%</span> Hit Chance</p>
+            </div>
+            <div class="skills-hero__info-wrapper-img">
+              <img src="../assets/img/element_1.png" class="skills-hero__info-element">
+              <img src="../assets/img/element_2.png" class="skills-hero__info-element">
+            </div>
+          </div>
+          <p class="skills-hero__info-description">Lorem Ipsum is Ability: 35 of the printing and typesetting industry. Damage: 19</p>
+        </div>
+
       </li>
       <li class="skills-hero__skill" v-bind="currentHeroSkills" @click="keyE">
-        <img :src="currentHeroSkills[2].img"><span class="red"></span><p>E</p>
+        <img class="skills-hero__skill-icon" :src="currentHeroSkills[2].img">
+        <span class="red"></span>
+        <p class="skills-hero__key">E</p>
+
+        <div class="skills-hero__hover-info">
+          <div class="skills-hero__info-top">
+            <div class="skills-hero__info-wrapper-img"><img :src="currentHeroSkills[2].img" class="skills-hero__info-img"></div>
+            <div class="skills-hero__info-text-top">
+              <p class="skills-hero__info-name">{{ currentHeroSkills[2].name }}</p>
+              <p class="skills-hero__info-hit-chance"><span>100%</span> Hit Chance</p>
+            </div>
+            <div class="skills-hero__info-wrapper-img">
+              <img src="../assets/img/element_1.png" class="skills-hero__info-element">
+              <img src="../assets/img/element_2.png" class="skills-hero__info-element">
+            </div>
+          </div>
+          <p class="skills-hero__info-description">Lorem Ipsum is Ability: 35 of the printing and typesetting industry. Damage: 19</p>
+        </div>
+
       </li>
-      <li class="skills-hero__skill" @click="switchMyHero"><img src="../assets/img/icon-swap.png" alt=""><p>C</p></li>
+      <li class="skills-hero__skill" @click="switchMyHero">
+        <img src="../assets/img/icon-swap.png" alt="">
+        <p class="skills-hero__key">C</p>
+      </li>
     </ul>
   </div>
 </template>
@@ -81,6 +138,7 @@ export default ({
   .skills-hero {
     width: 440px;
     height: 144px;
+    margin-right: auto;
   }
   .skills-hero__list {
     list-style: none;
@@ -113,14 +171,15 @@ export default ({
     opacity: 0.1;
     cursor: initial;
   }
-  .skills-hero__skill img {
+  .skills-hero__skill-icon {
     display: block;
     margin: 5px;
     border-radius: 15px;
     width: 80px;
     height: auto;
   }
-  .skills-hero__skill span {
+  .skills-hero__skill .green,
+  .skills-hero__skill .red {
     position: absolute;
     right: 0;
     bottom: 0;
@@ -136,7 +195,7 @@ export default ({
   .skills-hero__skill .green {
     background: #242333 url('../assets/img/green-arrow.png') no-repeat center;
   }
-  .skills-hero__skill p {
+  .skills-hero__key {
     width: 76px;
     height: 28px;
     border-radius: 16px;
@@ -146,5 +205,70 @@ export default ({
     margin: 0 auto;
     margin-top: 12px;
     font-size: 18px;
+  }
+
+  .skills-hero__skill:hover .skills-hero__hover-info  {
+    opacity: 1;
+  }
+
+  .skills-hero__hover-info {
+    position: absolute;
+    bottom: 120px;
+    width: 440px;
+    background: rgba(28, 27, 42, 0.85);
+    border-radius: 16px;
+    box-sizing: border-box;
+    padding: 12px 16px;
+    left: -105px;
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+  .skills-hero__hover-info::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 27px;
+    background: url('../assets/img/border_bottom.png') no-repeat center;
+  }
+  .skills-hero__info-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .skills-hero__info-wrapper-img {
+    font-size: 0;
+  }
+  .skills-hero__info-wrapper-img .skills-hero__info-img {
+    width: 51px;
+    height: 51px;
+    border-radius: 8px;
+  }
+  .skills-hero__info-description {
+    font-size: 14px;
+    font-weight: 400;
+    text-align: left;
+    margin-bottom: 0;
+    margin-top: 10px;
+  }
+  .skills-hero__info-name {
+    margin: 0;
+    text-align: left;
+    font-size: 16px;
+  }
+  .skills-hero__info-hit-chance {
+    margin: 0;
+    text-align: left;
+    font-size: 16px;
+  }
+  .skills-hero__info-text-top {
+    margin-right: auto;
+    margin-left: 10px;
+    margin-top: 6px;
+  }
+  .skills-hero__info-element {
+    margin-left: 14px;
   }
 </style>
